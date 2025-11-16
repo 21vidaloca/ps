@@ -37,8 +37,7 @@ $$C_{\text{final}} = \text{max}_{c \in \{\text{spam}, \text{ham}\}} P(D|C) \cdot
 
 **Asumpția \"Naivă\":** Algoritmul presupune că toate cuvintele
 (token-urile) $w_i$ din document sunt **independente condiționat** de
-clasă. Aceasta este o simplificare puternică (de unde \"naiv\"), dar
-funcționează bine în practică.
+clasă.
 
 $$P(D|C) = P(w_1, w_2, \dots, w_n | C) \approx \prod_{i=1}^{n} P(w_i | C)$$
 
@@ -57,9 +56,8 @@ logaritmică:
 $$C_{\text{final}} = \text{max}_{c} \left( \log(P(C)) + \sum_{i=1}^{n} \log(P(w_i | C)) \right)$$
 
 Acest lucru este reflectat direct în funcția `predict`:\
-`score = self.log_prior[c]` (termenul $\log(P(C))$)\
-`score += self.log_likelihood[c][word]` (termenul
-$\sum \log(P(w_i | C))$)
+`score = self.log_prior[c]` (termenul $\log(P(C))$ )\
+`score += self.log_likelihood[c][word]` (termenul $\sum \log(P(w_i | C))$ )
 
 ## Calculul Probabilităților
 
