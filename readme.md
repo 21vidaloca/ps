@@ -56,8 +56,8 @@ logaritmică:
 $$C_{\text{final}} = \text{max}_{c} \left( \log(P(C)) + \sum_{i=1}^{n} \log(P(w_i | C)) \right)$$
 
 Acest lucru este reflectat direct în funcția `predict`:\
-`score = self.log_prior[c]` (termenul $\log(P(C))$ )\
-`score += self.log_likelihood[c][word]` (termenul $\sum \log(P(w_i | C))$ )
+* `score = self.log_prior[c]` (termenul $\log(P(C))$ )\
+* `score += self.log_likelihood[c][word]` (termenul $\sum \log(P(w_i | C))$ )
 
 ## Calculul Probabilităților
 
