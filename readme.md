@@ -33,7 +33,7 @@ Pentru clasificare, dorim să găsim clasa $C$ care maximizează această
 probabilitate. Deoarece $P(D)$ este constant pentru toate clasele, îl
 putem ignora:
 
-$$C_{\text{final}} = \operatorname*{arg\,max}_{c \in \{\text{spam}, \text{ham}\}} P(D|C) \cdot P(C)$$
+$$C_{\text{final}} = \text{max}_{c \in \{\text{spam}, \text{ham}\}} P(D|C) \cdot P(C)$$
 
 **Asumpția \"Naivă\":** Algoritmul presupune că toate cuvintele
 (token-urile) $w_i$ din document sunt **independente condiționat** de
@@ -44,7 +44,7 @@ $$P(D|C) = P(w_1, w_2, \dots, w_n | C) \approx \prod_{i=1}^{n} P(w_i | C)$$
 
 Combinând, formula devine:
 
-$$C_{\text{final}} = \operatorname*{arg\,max}_{c} P(C) \cdot \prod_{i=1}^{n} P(w_i | C)$$
+$$C_{\text{final}} = \text{max}_{c} P(C) \cdot \prod_{i=1}^{n} P(w_i | C)$$
 
 ## Implementarea în Cod
 
@@ -54,7 +54,7 @@ scriptul lucrează cu **logaritmii probabilităților**. Transformarea este
 monotonă, deci clasa care maximizează produsul va maximiza și suma
 logaritmică:
 
-$$C_{\text{final}} = \operatorname*{arg\,max}_{c} \left( \log(P(C)) + \sum_{i=1}^{n} \log(P(w_i | C)) \right)$$
+$$C_{\text{final}} = \text{max}_{c} \left( \log(P(C)) + \sum_{i=1}^{n} \log(P(w_i | C)) \right)$$
 
 Acest lucru este reflectat direct în funcția `predict`:\
 `score = self.log_prior[c]` (termenul $\log(P(C))$)\
