@@ -221,10 +221,6 @@ următoarele coloane:
     corect.
 
 2.  Rulați scriptul folosind comanda:
-
-```{=html}
-<!-- -->
-```
     python main.py
 
 # Exemple de Utilizare
