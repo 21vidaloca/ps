@@ -84,7 +84,7 @@ documentul aparține clasei $C$.
 **Netezirea (Smoothing):** O problemă apare dacă un cuvânt din setul de
 testare nu a fost văzut niciodată în setul de antrenare pentru o anumită
 clasă. Acest lucru ar duce la o probabilitate de 0, care, prin înmulțire
-(sau $\log(0)$), ar anula scorul întregii clase.
+sau $\log(0)$ ar anula scorul întregii clase.
 
 Pentru a preveni asta, se folosește **Netezirea Laplace (sau Add-k)**.
 Scriptul folosește `alpha=1.0` (Add-1).
