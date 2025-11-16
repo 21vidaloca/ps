@@ -50,7 +50,7 @@ class MultinomialNaiveBayes:
         all_words = text_curat.split()
         return [word for word in all_words]# if word not in self.stop_words]
 
-    def fit(self, X_train, y_train):
+    def train(self, X_train, y_train):
         num_messages = len(X_train)
         num_docs_per_class = defaultdict(int)
         word_counts_per_class = defaultdict(lambda: defaultdict(int))
@@ -137,7 +137,7 @@ print(f"Impartire date: {len(X_train)} antrenare, {len(X_test)} testare.")
 # 3. Antrenarea Modelului
 print("Se antreneaza modelul Naive Bayes (cu filtrare stop-words)...")
 model = MultinomialNaiveBayes(alpha=1.0)
-model.fit(X_train, y_train)
+model.train(X_train, y_train)
 print("Antrenare finalizata.")
 
 # 4. Testarea Modelului

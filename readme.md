@@ -120,60 +120,21 @@ Scriptul este compus dintr-o singură clasă, `MultinomialNaiveBayes`, și
 un bloc de execuție principal care gestionează datele și rulează
 modelul.
 
-## Importuri și Configurare
-
--   `re`: Pentru expresii regulate (folosit la curățarea textului).
-
--   `math`: Pentru funcția `math.log`.
-
--   `random`: Pentru amestecarea datelor (`random.shuffle`).
-
--   `csv`: Pentru citirea fișierului de date.
-
--   `sys` și `defaultdict`: Utilitare standard.
-
--   **Blocul `csv.field_size_limit`:** Acesta este un fix de robustețe.
-    Unele mesaje (email-uri) pot fi foarte lungi, depășind limita
-    implicită a cititorului CSV. Acest bloc încearcă să seteze limita la
-    cea mai mare valoare posibilă pentru a preveni erorile de tip
-    `Error: field larger than field limit`.
-
 ## Clasa `MultinomialNaiveBayes`
 
 -   **`__init__(self, alpha=1.0)`**
 
     -   Constructorul clasei.
 
-    -   `self.alpha`: Stochează parametrul de netezire Laplace.
-
-    -   `self.log_prior`: Dicționar pentru a stoca $\log(P(C))$.
-
-    -   `self.log_likelihood`: Dicționar de dicționare pentru a stoca
-        $\log(P(w|C))$.
-
-    -   `self.vocab`: Un set care va conține toate cuvintele unice din
-        datele de antrenare.
-
-    -   `self.classes`: Un set care va conține etichetele unice (ex:
-        'spam', 'ham').
-
 -   **`_tokenize(self, text)`**
 
     -   Funcție internă de pre-procesare a textului.
 
-    -   Transformă textul în minuscule (`text.lower()`).
-
-    -   Elimină toate caracterele care nu sunt litere sau spații
-        (`re.sub(r’[^a-z\s]’, ”, ...)`).
-
     -   Împarte textul într-o listă de cuvinte (tokeni).
 
--   **`fit(self, X_train, y_train)`**
+-   **`train(self, X_train, y_train)`**
 
     -   Funcția de **antrenare** a modelului.
-
-    -   Primește listele de mesaje (`X_train`) și etichetele
-        corespunzătoare (`y_train`).
 
     -   **Pași:**
 
@@ -228,27 +189,6 @@ modelul.
 
         5.  Returnează o listă cu toate predicțiile.
 
-## Blocul Principal de Execuție
-
-Această parte a scriptului încarcă datele și orchestrează procesul de
-antrenare și testare.
-
-1.  **Încărcarea Datelor:** Deschide `combined_data.csv`, citește datele
-    (sărind peste antet) și populează listele `messages` și `labels`.
-
-2.  **Pregătirea Datelor:** Combină, amestecă (folosind
-    `random.seed(42)` pentru reproductibilitate) și împarte datele în
-    80% antrenare și 20% testare.
-
-3.  **Antrenarea Modelului:** Creează o instanță `MultinomialNaiveBayes`
-    și apelează `model.fit()`.
-
-4.  **Testarea și Evaluarea:** Apelează `model.predict()` pe setul de
-    test și calculează acuratețea.
-
-5.  **Exemple Noi:** Definește și testează două mesaje noi (`test_spam`,
-    `test_ham`) și afișează predicția.
-
 # Instrucțiuni de Utilizare
 
 ## Cerințe
@@ -270,9 +210,9 @@ următoarele coloane:
 **Exemplu `combined_data.csv`:**
 
     label,text
-    ham,"Hey, are you around? I'm running a bit late..."
-    spam,"Congratulations! You've won a free iPhone. Click here..."
-    ham,"Ok, see you in 5."
+    0,"Hey, are you around? I'm running a bit late..."
+    1,"Congratulations! You've won a free iPhone. Click here..."
+    0,"Ok, see you in 5."
     ...
 
 ## Rulare
@@ -280,11 +220,7 @@ următoarele coloane:
 1.  Asigurați-vă că fișierul `combined_data.csv` este în directorul
     corect.
 
-2.  Deschideți un terminal sau o linie de comandă.
-
-3.  Navigați în directorul care conține `main.py`.
-
-4.  Rulați scriptul folosind comanda:
+2.  Rulați scriptul folosind comanda:
 
 ```{=html}
 <!-- -->
